@@ -1,5 +1,5 @@
-use advent_of_code_2024::day1::day1_a::day1_a;
+use advent_of_code_2024::day1::day1_b::day1_b;
 
 fn main() {
-    println!("{}", day1_a("inputs/day1_a.txt".to_string()));
+    println!("{}", day1_b("inputs/day1_b.txt".to_string()));
 }
