@@ -5,15 +5,25 @@ pub fn parse_corrupted_memory(filename: String) -> i32 {
         .expect("Fail to read file")
         .replace("\n", "")
         .replace("\r", "");
-    file_content
-        .match_indices("mul(")
-        .filter_map(|(i, _)| {
-            let start = &file_content[i + 4..];
-            let end = start.find(")")?;
-            let (a, b) = &start[..end].split_once(",")?;
-            let num1 = a.parse::<i32>().ok()?;
-            let num2 = b.parse::<i32>().ok()?;
-            Some(num1 * num2)
-        })
-        .sum()
+
+    let chars = file_content.chars().collect::<Vec<char>>();
+    let mut result = 0;
+    for (i, window) in chars.windows(4).enumerate() {
+        if ['m', 'u', 'l', '('] == window {
+            let temp_vec = &chars[i + 4..];
+            if let Some(position) = temp_vec.iter().position(|&c| c == ')') {
+                let substring = temp_vec[0..position]
+                    .split(|&x| x == ',')
+                    .collect::<Vec<&[char]>>();
+                if let [a_part, b_part] = substring.as_slice() {
+                    let a_str: String = a_part.iter().collect();
+                    let b_str: String = b_part.iter().collect();
+                    if let (Ok(a), Ok(b)) = (a_str.parse::<i32>(), b_str.parse::<i32>()) {
+                        result += a * b;
+                    }
+                }
+            }
+        }
+    }
+    result
 }
