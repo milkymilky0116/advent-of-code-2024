@@ -1,6 +1,6 @@
 use std::fs;
 
-pub fn day2_b(filename: String) -> i32 {
+pub fn day2_a(filename: String) -> i32 {
     let file_content = fs::read_to_string(filename).expect("Fail to read file");
     let lines: Vec<Vec<i32>> = file_content
         .lines()
