@@ -1,8 +1,5 @@
-use advent_of_code_2024::day3::day3_b::parse_corrupted_memory_do;
+use advent_of_code_2024::day4::day4_a::find_xmas;
 
 fn main() {
-    println!(
-        "{:?}",
-        parse_corrupted_memory_do("inputs/day3_a.txt".to_string())
-    );
+    println!("{}", find_xmas("inputs/day4_a.txt".to_string()));
 }
